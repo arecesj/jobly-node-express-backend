@@ -34,6 +34,8 @@ beforeEach(async function() {
 describe('User.getAll()', () => {
   it('Should get back all of the companies and responds with Company Data', async function() {
     const result = await Company.getAll();
+
+    expect(result.).toBe(1);
   });
 });
 
