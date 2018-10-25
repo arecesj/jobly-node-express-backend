@@ -22,6 +22,7 @@ class Company {
     search = search === undefined ? '' : search;
     //NOTE: VICTOR, I REFACTORED THIS USING JOEL'S EXAMPLE. I ALSO GOT RID OF OUR QUERY AND PUT IT IN THE PARAMS
     //LETS CHECK TO MAKE SURE I DIDNT BREAK ANYTHING!!!
+    //JEST WORKED!!!
 
     // if (min_employees === undefined) {
     //   min_employees = 0;
