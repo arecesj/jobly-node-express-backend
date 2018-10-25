@@ -45,7 +45,7 @@ router.get('/', minMaxSize, async function(req, res, next) {
   }
 });
 
-/** Post all Companies, result is JSON and looks like {company: companyData} */
+/** POST create a  Companies, result is JSON and looks like {company: companyData} */
 router.post('/', async function(req, res, next) {
   try {
     const { handle, name } = req.body;

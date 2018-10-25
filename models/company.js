@@ -16,23 +16,9 @@ class Company {
 
   /** Allows search for all companies, can include search, min, and max. Returns a filtered list of handles and names */
   static async search({ search, min_employees, max_employees }) {
-    //
     min_employees = min_employees === undefined ? 0 : min_employees;
     max_employees = max_employees === undefined ? 3000000 : max_employees;
     search = search === undefined ? '' : search;
-    //NOTE: VICTOR, I REFACTORED THIS USING JOEL'S EXAMPLE. I ALSO GOT RID OF OUR QUERY AND PUT IT IN THE PARAMS
-    //LETS CHECK TO MAKE SURE I DIDNT BREAK ANYTHING!!!
-    //JEST WORKED!!!
-
-    // if (min_employees === undefined) {
-    //   min_employees = 0;
-    // }
-    // if (max_employees === undefined) {
-    //   max_employees = 3000000;
-    // }
-    // if (search === undefined) {
-    //   search = '';
-    // }
 
     // TODO: write helper function for WHERE clause
     //Let's keep double checking the WHERE clause
@@ -48,55 +34,76 @@ class Company {
   }
 
   /** Create new company */
-  static async create(query) {
-    let { handle, name } = query;
+  static async create({ handle, name }) {
+    try {
+      const newCompany = await db.query(
+        `INSERT INTO companies (handle, name) 
+        VALUES ($1, $2)
+        RETURNING handle, name`,
+        [handle, name]
+      );
 
-    const newCompany = await db.query(
-      `INSERT INTO companies (handle, name) 
-      VALUES ($1, $2)
-      RETURNING handle, name`,
-      [handle, name]
-    );
-
-    return newCompany.rows[0];
+      return newCompany.rows[0];
+    } catch (err) {
+      const error = new Error('Add both handle AND name');
+      error.status = 400;
+      throw error;
+    }
   }
 
   /** Get a company by its handle */
-  static async getOne(query) {
+  static async getOne(handle) {
     const result = await db.query(
       `SELECT handle, name, num_employees, description, logo_url
-      FROM companies
-      WHERE handle=$1`,
-      [query]
+        FROM companies
+        WHERE handle=$1`,
+      [handle]
     );
 
     return result.rows[0];
   }
 
   /** Edit a company by its handle. */
-  static async update(handle, query) {
-    const formatUpdateDB = await sqlForPartialUpdate(
-      'companies',
-      query,
-      'handle',
-      handle
-    );
+  static async update(handle, items) {
+    try {
+      const formatUpdateDB = await sqlForPartialUpdate(
+        'companies',
+        items,
+        'handle',
+        handle
+      );
 
-    const updatedCompany = await db.query(
-      formatUpdateDB.query,
-      formatUpdateDB.values
-    );
+      const updatedCompany = await db.query(
+        formatUpdateDB.query,
+        formatUpdateDB.values
+      );
 
-    return updatedCompany.rows[0];
+      return updatedCompany.rows[0];
+    } catch (err) {
+      throw new Error(
+        'Please enter correct company handle and associated info'
+      );
+    }
   }
 
   /** Delete a company by its handle. */
   static async delete(handle) {
-    const deleteCompany = await db.query(
-      `DELETE FROM companies WHERE handle=$1`,
-      [handle]
-    );
-    return { message: 'Company deleted' };
+    try {
+      let queried = await db.query(`DELETE FROM companies WHERE handle=$1`, [
+        handle
+      ]);
+      if (queried.rowCount === 0) {
+        //TODO: We should be able to refactor this later
+        let error = new Error('Please enter correct company handle');
+        throw error;
+      } else {
+        return { message: 'Company deleted' };
+      }
+    } catch (err) {
+      let error = new Error('Please enter correct company handle');
+      error.status = 400;
+      throw error;
+    }
   }
 }
 

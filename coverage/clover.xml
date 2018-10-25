@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1540492445619" clover="3.2.0">
+  <project timestamp="1540492445620" name="All files">
+    <metrics statements="55" coveredstatements="51" conditionals="16" coveredconditionals="12" methods="7" coveredmethods="7" elements="78" coveredelements="70" complexity="0" loc="55" ncloc="55" packages="3" files="4" classes="4">
+      <package name="express-jobly">
+        <metrics statements="12" coveredstatements="11" conditionals="8" coveredconditionals="5" methods="0" coveredmethods="0"/>
+        <file name="config.js" path="/Users/JuanAreces/Desktop/express-jobly/config.js">
+          <metrics statements="7" coveredstatements="6" conditionals="8" coveredconditionals="5" methods="0" coveredmethods="0"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="6" count="1" type="cond" truecount="2" falsecount="0"/>
+          <line num="8" count="1" type="cond" truecount="2" falsecount="0"/>
+          <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="19" count="1" type="stmt"/>
+          <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="25" count="1" type="stmt"/>
+        </file>
+        <file name="db.js" path="/Users/JuanAreces/Desktop/express-jobly/db.js">
+          <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="11" count="1" type="stmt"/>
+          <line num="14" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="express-jobly.helpers">
+        <metrics statements="16" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <file name="partialUpdate.js" path="/Users/JuanAreces/Desktop/express-jobly/helpers/partialUpdate.js">
+          <metrics statements="16" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+          <line num="18" count="3" type="stmt"/>
+          <line num="19" count="3" type="stmt"/>
+          <line num="22" count="3" type="stmt"/>
+          <line num="23" count="2" type="cond" truecount="1" falsecount="1"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="28" count="3" type="stmt"/>
+          <line num="29" count="2" type="stmt"/>
+          <line num="30" count="2" type="stmt"/>
+          <line num="34" count="3" type="stmt"/>
+          <line num="35" count="3" type="stmt"/>
+          <line num="36" count="3" type="stmt"/>
+          <line num="38" count="3" type="stmt"/>
+          <line num="39" count="2" type="stmt"/>
+          <line num="40" count="2" type="stmt"/>
+          <line num="42" count="2" type="stmt"/>
+          <line num="45" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="express-jobly.models">
+        <metrics statements="27" coveredstatements="25" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
+        <file name="company.js" path="/Users/JuanAreces/Desktop/express-jobly/models/company.js">
+          <metrics statements="27" coveredstatements="25" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
+          <line num="1" count="1" type="stmt"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="14" count="1" type="stmt"/>
+          <line num="19" count="12" type="cond" truecount="2" falsecount="0"/>
+          <line num="20" count="12" type="cond" truecount="2" falsecount="0"/>
+          <line num="21" count="12" type="cond" truecount="2" falsecount="0"/>
+          <line num="25" count="12" type="stmt"/>
+          <line num="33" count="12" type="stmt"/>
+          <line num="38" count="2" type="stmt"/>
+          <line num="39" count="2" type="stmt"/>
+          <line num="46" count="1" type="stmt"/>
+          <line num="48" count="1" type="stmt"/>
+          <line num="54" count="2" type="stmt"/>
+          <line num="55" count="2" type="stmt"/>
+          <line num="62" count="2" type="stmt"/>
+          <line num="64" count="0" type="stmt"/>
+          <line num="70" count="3" type="stmt"/>
+          <line num="71" count="3" type="stmt"/>
+          <line num="78" count="2" type="stmt"/>
+          <line num="83" count="2" type="stmt"/>
+          <line num="85" count="1" type="stmt"/>
+          <line num="93" count="1" type="stmt"/>
+          <line num="94" count="1" type="stmt"/>
+          <line num="95" count="1" type="stmt"/>
+          <line num="97" count="0" type="stmt"/>
+          <line num="102" count="1" type="stmt"/>
+        </file>
+      </package>
+    </metrics>
+  </project>
+</coverage>
