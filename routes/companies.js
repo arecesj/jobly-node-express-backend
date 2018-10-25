@@ -13,7 +13,7 @@ function minMaxSize(req, res, next) {
     if (min < max || isNaN(min) || isNaN(max)) {
       return next();
     } else {
-      return next(err);
+      throw new Error('Ya failure!');
     }
   } catch (err) {
     return next({ status: 400, message: 'invalid min/max requirements' });
@@ -33,6 +33,10 @@ router.get('/', minMaxSize, async function(req, res, next) {
       companies = await Company.getAll();
     } else {
       companies = await Company.search(req.query);
+    }
+
+    if (companies.length === 0) {
+      throw new Error('No companies matched your search');
     }
 
     return res.json({ companies });

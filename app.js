@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
 
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-
+  console.log('MIDDLEWARE ERRAH', err);
   return res.json({
     error: err,
     message: err.message
