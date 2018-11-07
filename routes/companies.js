@@ -36,6 +36,7 @@ router.get('/', minMaxSize, async function(req, res, next) {
     }
 
     if (companies.length === 0) {
+      // {companies: []}      {company: undefined}
       throw new Error('No companies matched your search');
     }
 
@@ -61,6 +62,7 @@ router.post('/', async function(req, res, next) {
 });
 
 /** Get company by its ID, result is JSON and looks like {company: companyData} */
+
 router.get('/:handle', async function(req, res, next) {
   try {
     const company = await Company.getOne(req.params.handle);
@@ -86,7 +88,8 @@ router.patch('/:handle', async function(req, res, next) {
 router.delete('/:handle', async function(req, res, next) {
   try {
     const company = await Company.delete(req.params.handle);
-    return res.json(company);
+    // return res.json(company);
+    return { message: 'Company deleted' };
   } catch (err) {
     return next(err);
   }

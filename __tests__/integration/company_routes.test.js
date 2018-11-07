@@ -31,6 +31,30 @@ beforeEach(async function() {
       'https://i.ytimg.com/vi/a8rPMdIiciY/hqdefault.jpg'
     ]
   );
+  await db.query(
+    `INSERT INTO companies (
+      handle, name, num_employees, description, logo_url)
+      VALUES ($1, $2, $3, $4, $5)`,
+    [
+      'JCS',
+      "Juan's Coffee Shop",
+      300,
+      'Keeping Victor caffeinated since 1991',
+      'https://i.ytimg.com/vi/a8rPMdIiciY/hqdefault.jpg'
+    ]
+  );
+  await db.query(
+    `INSERT INTO companies (
+      handle, name, num_employees, description, logo_url)
+      VALUES ($1, $2, $3, $4, $5)`,
+    [
+      'JCOS',
+      "Juan's Cookie Shop",
+      500000,
+      'Keeping Victor fat and happy since 1991',
+      'https://i.ytimg.com/vi/a8rPMdIiciY/hqdefault.jpg'
+    ]
+  );
 });
 
 /** ROUTES WITH FUNCTIONAL PARAMS */
@@ -39,8 +63,8 @@ describe('GET /companies', function() {
   test('Responds with a list of companies in an array', async function() {
     const response = await request(app).get(`/companies`);
     // console.log('WHAT IS RESPONSE:', response.body);
-    expect(response.statusCode).toBe(200);
-    expect(response.body.companies.length).toBe(1);
+    expect(response.statusCode).toBe(200); //OK
+    expect(response.body.companies.length).toBe(3);
     expect(response.body.companies[0]).toEqual({
       handle: 'JDAB',
       name: 'JD Areces and Bros, LLC'
@@ -58,7 +82,7 @@ describe('POST /companies', function() {
         name: "Victor's jabronis"
       });
     // console.log('WHAT IS RESPONSE:', response.body);
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(200); // OK
     expect(Object.keys(response.body.company).length).toBe(2);
     expect(response.body.company).toEqual({
       handle: 'JAB',
@@ -72,7 +96,7 @@ describe('GET /companies/handle', function() {
   test('Responds with a list of company in an object', async function() {
     const response = await request(app).get(`/companies/JDAB`);
     // console.log('WHAT IS RESPONSE:', response.body);
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(200); // OK
     expect(Object.keys(response.body.company).length).toBe(5);
     expect(response.body.company).toEqual({
       handle: 'JDAB',
@@ -93,7 +117,7 @@ describe('PATCH /companies/handle', function() {
         name: 'JD Bros and Sisters, A Family Firm'
       });
     // console.log('WHAT IS RESPONSE:', response.body);
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(200); // OK
     expect(Object.keys(response.body.company).length).toBe(5);
     expect(response.body.company).toEqual({
       handle: 'JDAB',
@@ -115,7 +139,7 @@ describe('DELETE /companies/handle', function() {
       });
 
     // console.log('WHAT IS RESPONSE:', response.body);
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(200); // OK
     expect(response.body.message).toBe('Company deleted');
   });
 });
@@ -131,7 +155,7 @@ describe('POST /companies', function() {
         name: "Victor's jabronis"
       });
 
-    expect(response.statusCode).toBe(400);
+    expect(response.statusCode).toBe(400); // bad request
     expect(Object.keys(response.body).length).toBe(2);
     expect(response.body.message).toBe('Add both handle AND name');
   });
@@ -142,7 +166,7 @@ describe('GET /companies/handle', function() {
   test('Does not get a company based on its handle and responds with an empty object', async function() {
     const response = await request(app).get(`/companies/AYYY`);
     // console.log('WHAT IS DYSFUNC RESPONSE:', response.body);
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(200); // OK
     expect(Object.keys(response.body).length).toBe(0);
   });
 });
@@ -157,7 +181,7 @@ describe('PATCH /companies/handle', function() {
         name: 'Hello there'
       });
     // console.log('WHAT IS DYNC RESPONSE:', response.body);
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(200); // OK
     expect(Object.keys(response.body).length).toBe(0);
   });
 });
@@ -172,9 +196,9 @@ describe('DELETE /companies/handle', function() {
       });
 
     // console.log('WHAT IS RESPONSE:', response.body);
-    expect(response.statusCode).toBe(400);
+    expect(response.statusCode).toBe(400); // bad request
     expect(response.body.message).toBe('Please enter correct company handle');
-    expect(response.body.error.status).toBe(400);
+    expect(response.body.error.status).toBe(400); // bad request
   });
 });
 

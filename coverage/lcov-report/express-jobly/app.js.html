@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for express-jobly/config.js</title>
+    <title>Code coverage report for express-jobly/app.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">All files</a> / <a href="index.html">express-jobly</a> config.js
+      <a href="../index.html">All files</a> / <a href="index.html">express-jobly</a> app.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">85.71% </span>
+        <span class="strong">81.25% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/7</span>
+        <span class='fraction'>13/16</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">62.5% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>5/8</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/0</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">85.71% </span>
+        <span class="strong">81.25% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/7</span>
+        <span class='fraction'>13/16</span>
       </div>
     </div>
   </div>
@@ -72,64 +72,85 @@
 27
 28
 29
-30</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+30
+31
+32
+33
+34
+35
+36
+37</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/** Shared config for application; can be req'd many places. */
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/** Express app for jobly. */
 &nbsp;
+const express = require('express');
+const app = express();
+app.use(express.json());
 &nbsp;
-require("dotenv").config();
+// add logging system
 &nbsp;
-const SECRET = process.env.SECRET_KEY || 'test';
+const morgan = require('morgan');
+app.use(morgan('tiny'));
 &nbsp;
-const PORT = +process.env.PORT || 3000;
+const companyRoutes = require('./routes/companies').router;
+app.use('/companies', companyRoutes);
 &nbsp;
-// database is:
-//
-// - on Heroku, get from env var DATABASE_URL
-// - in testing, 'jobly-test'
-// - else: 'jobly'
+/** 404 handler */
 &nbsp;
-let DB_URI;
+app.use(<span class="fstat-no" title="function not covered" >fu</span>nction(req, res, next) {
+  const err = <span class="cstat-no" title="statement not covered" >new Error('Not Found');</span>
+<span class="cstat-no" title="statement not covered" >  err.status = 404;</span>
 &nbsp;
-<span class="missing-if-branch" title="else path not taken" >E</span>if (process.env.NODE_ENV === "test") {
-  DB_URI = "jobly-test";
-} else {
-<span class="cstat-no" title="statement not covered" >  DB_URI  = process.env.DATABASE_URL || 'jobly';</span>
-}
+  // pass the error to the next piece of middleware
+<span class="cstat-no" title="statement not covered" >  return next(err);</span>
+});
 &nbsp;
+/** general error handler */
 &nbsp;
-module.exports = {
-  SECRET,
-  PORT,
-  DB_URI,
-};
+app.use(function(err, req, res, next) {
+  res.status(err.status || <span class="branch-1 cbranch-no" title="branch not covered" >500)</span>;
+  console.log('MIDDLEWARE ERRAH', err);
+  return res.json({
+    error: err,
+    message: err.message
+  });
+});
+&nbsp;
+module.exports = app;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
